@@ -1,20 +1,17 @@
 import SwiftUI
 
 struct ProductListView: View {
-    @StateObject var productService = ProductService()
-    @EnvironmentObject var basket: BasketService
-
+    @EnvironmentObject var productVM: ProductViewModel
+    @EnvironmentObject var basketVM: BasketViewModel
     var body: some View {
-        List(productService.products) { product in
+        List(productVM.products) { product in
             HStack {
-                Image(systemName: "photo") // Ou charger depuis product.imageUrl
+                AsyncImage(url: URL(string: product.imageUrl))
                 Text(product.name)
-                Text("\(product.price, specifier: "%.2f")€")
-                Button("Ajouter au panier") {
-                    basket.addToBasket(product)
-                }
+                Text("\(product.price, specifier: "%.2f") €")
+                Button("Ajouter au panier") { basketVM.add(product) }
             }
         }
-        .onAppear { productService.fetchProducts() }
+        .onAppear { productVM.fetchProducts() }
     }
 }

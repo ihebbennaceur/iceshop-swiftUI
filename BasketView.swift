@@ -1,27 +1,21 @@
 import SwiftUI
 
 struct BasketView: View {
-    @EnvironmentObject var basket: BasketService
-
+    @EnvironmentObject var basketVM: BasketViewModel
     var body: some View {
         VStack {
-            List(basket.products) { product in
+            List(basketVM.items) { product in
                 HStack {
                     Text(product.name)
                     Spacer()
-                    Text("\(product.price, specifier: "%.2f")€")
+                    Text("\(product.price, specifier: "%.2f") €")
                 }
             }
-            Text("Total : \(basket.total, specifier: "%.2f")€")
+            Text("Total: \(basketVM.total, specifier: "%.2f") €")
             HStack {
-                Button("Vider le panier") {
-                    basket.clearBasket()
-                }
-                Button("Payer") {
-                    // Logique à implémenter plus tard
-                }
+                Button("Vider le panier") { basketVM.clear() }
+                Button("Payer") { /* Pas de logique backend */ }
             }
-            .padding()
         }
     }
 }

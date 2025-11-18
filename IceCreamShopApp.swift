@@ -1,12 +1,10 @@
 import SwiftUI
+import Firebase
 
 @main
 struct IceCreamShopApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    init() { FirebaseApp.configure() }
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+        WindowGroup { RootView() }
     }
 }
