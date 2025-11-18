@@ -1,0 +1,8 @@
+import Foundation
+
+struct Product: Identifiable, Codable {
+    var id: String
+    var name: String
+    var price: Double
+    var imageUrl: String
+}
